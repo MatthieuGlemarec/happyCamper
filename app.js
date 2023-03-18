@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const Campground = require('./models/campground');
 const methodOverride = require('method-override');
 
@@ -11,6 +12,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.engine('ejs', ejsMate);
 
 //connect mongoose and set useNewUrslParser: true as recommended.
 mongoose.connect('mongodb://127.0.0.1:27017/happy-camper', { useNewUrlParser: true })
