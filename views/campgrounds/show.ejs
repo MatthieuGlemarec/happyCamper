@@ -8,6 +8,9 @@
                     <h3 class="card-title">
                         <%= campground.title %>
                     </h3>
+                    <h5>
+                        <%= campground.author.username %>
+                    </h5>
                     <p class="card-text">
                         <%= campground.description %>
                     </p>
@@ -20,12 +23,14 @@
                         €<%= campground.price %>.00/night
                     </li>
                 </ul>
-                <div class="card-body">
-                    <a class="card-link btn btn-primary" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
-                    <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
+                <% if (currentUser && campground.author.equals(currentUser)) { %>
+                    <div class="card-body">
+                        <a class="card-link btn btn-primary" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                        <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                    <% } %>
             </div>
             <div class="card-footer text-body-secondary mb-3">
                 2 days ago
