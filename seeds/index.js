@@ -17,7 +17,7 @@ const sample = array => array[Math.floor(Math.random() * array.length)]
 
 const seedDB = async () => {
     await campground.deleteMany({});
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 300; i++) {
         const random1000 = Math.floor(Math.random() * 999);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new campground({
@@ -26,17 +26,20 @@ const seedDB = async () => {
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             geometry: {
-               type: 'Point',
-               coordinates: [-8.27781, 54.4796]
+                type: 'Point',
+                coordinates: [
+                    cities[random1000].longitude,
+                    cities[random1000].latitude
+                ]
             },
             images: [
                 {
-                    url: 'https://res.cloudinary.com/dy6ye1v8b/image/upload/v1687533872/HappyCamper/rtai3qgw8tc9aflsshc4.jpg',
-                    filename: 'HappyCamper/rtai3qgw8tc9aflsshc4',
+                    url: 'https://res.cloudinary.com/dy6ye1v8b/image/upload/v1698078518/HappyCamper/vktxdtbtalcct7uxfsm1.jpg',
+                    filename: 'HappyCamper/vktxdtbtalcct7uxfsm1',
                 },
                 {
-                    url: 'https://res.cloudinary.com/dy6ye1v8b/image/upload/v1687533874/HappyCamper/y6w6mocjembb2gvnk3bn.jpg',
-                    filename: 'HappyCamper/y6w6mocjembb2gvnk3bn',
+                    url: 'https://res.cloudinary.com/dy6ye1v8b/image/upload/v1698078518/HappyCamper/kfdzoqqf2uxctay82rah.jpg',
+                    filename: 'HappyCamper/kfdzoqqf2uxctay82rah',
                 }
             ],
             description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum error optio amet at dolores sed deserunt ratione eos sequi? Aspernatur consequuntur minus doloribus natus ad accusantium aliquam. Repellat, obcaecati expedita!',
