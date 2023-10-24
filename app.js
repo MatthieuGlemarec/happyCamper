@@ -21,33 +21,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const MongoStore = require('connect-mongo');
 const dbUrl = process.env.DB_URL
-// process.env.DB_URL
 
-
-//connect mongo and set useNewUrslParser: true as recommended.
-mongoose.connect(dbUrl, { useNewUrlParser: true })
-    .then(() => {
-        console.log('MONGO CONNECTION OPEN!')
-    })
-    .catch(err => {
-        console.log('MONGO ERROR!!!!')
-        console.log(err)
-    });
-
-//process.env.SESSION_SECRET
-
-const store = MongoStore.create({
-    mongoUrl: dbUrl,
-    touchAfter: 24 * 60 * 60,
-    crypto: {
-        secret: 'thisshouldbeasecret',
-    }
-});
-
-
-store.on("error", function (e) {
-    console.log('SESSION STORE ERROR', e)
-});
 
 //connect mongo and set useNewUrslParser: true as recommended.
 mongoose.connect(dbUrl, { useNewUrlParser: true })
@@ -63,7 +37,7 @@ const store = MongoStore.create({
     mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: 'thisshouldbeabettersecret',
+        secret: process.env.SESSION_SECRET,
     }
 });
 
@@ -72,11 +46,9 @@ store.on("error", function (e) {
 });
 
 const configSession = {
-    store: store,
+    store,
     name: 'session',
-
-    secret: 'thisshouldbeabettersecret',
-
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {

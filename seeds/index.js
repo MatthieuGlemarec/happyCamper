@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const campground = require('../models/campground');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers')
+require('dotenv').config();
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/happy-camper';
 
-mongoose.connect('mongodb://127.0.0.1:27017/happy-camper', { useNewUrlParser: true })
+mongoose.connect(dbUrl, { useNewUrlParser: true })
     .then(() => {
         console.log('MONGO CONNECTION OPEN!')
     })
