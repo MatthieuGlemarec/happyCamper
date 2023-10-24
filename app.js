@@ -21,7 +21,6 @@ const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const MongoStore = require('connect-mongo');
 const dbUrl = process.env.DB_URL
-// process.env.DB_URL
 
 
 //connect mongo and set useNewUrslParser: true as recommended.
@@ -33,8 +32,6 @@ mongoose.connect(dbUrl, { useNewUrlParser: true })
         console.log('MONGO ERROR!!!!')
         console.log(err)
     });
-
-//process.env.SESSION_SECRET
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
